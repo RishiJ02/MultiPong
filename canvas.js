@@ -122,7 +122,7 @@ database.ref().on("value", function(e){
 	ballY = e.val().y;
 	}
 	ballVX = e.val().VX;
-  });
+  };
 
 
 function clear(){
