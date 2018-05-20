@@ -33,8 +33,8 @@ var ballX = document.body.clientWidth;
 var paddleX = 5;
 var paddleY = 5;
 
-var ballVX = 40;
-var ballVY = 30;
+var ballVX = 10;
+var ballVY = 10;
 
 var score=0;
 
