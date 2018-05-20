@@ -25,7 +25,7 @@ var paddleY = 5;
 var ballVX = 15;
 var ballVY = 10;
 
-//var score=0;
+var score=0;
 
 paddleImage.onload = function(e){
 	console.log("START");
@@ -86,8 +86,8 @@ database.ref().once("value", function(e){
 		y:ballY,
 		screenWidth: document.body.clientWidth,
 		VX:10,
-		//slaveScore: 0,
-		//masterScore: 0
+		slaveScore: 0,
+		masterScore: 0
 	    });
 		database.ref().update({first: true});
 		MASTER=true;
@@ -112,17 +112,14 @@ database.ref().on("value", function(e){
 				y:document.body.clientHeight/2
 			});
 		}
-        
 	}else{
 		ballX = e.val().x-oppWidth;
 		disScore = e.val().masterScore;
 	}
-    
 	ballY = e.val().y;
 	}
 	ballVX = e.val().VX;
   });
-
 
 function clear(){
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -154,7 +151,7 @@ function renderPaddle(){
 		}
 	}
 }
-//var scoreRec = false;
+var scoreRec = false;
 var count =0;
 var hitWall = false;
 function render(){
@@ -171,10 +168,9 @@ function render(){
    			x:ballX+ballVX,
 			y:ballY+ballVY
 		});
-        /*
 		if(ballX<=0&&!scoreRec){
-			scoreRec=true;
-			score++;
+			//scoreRec=true;
+			//score++;
 			database.ref().update({
 				masterScore: score,
 				x:document.body.clientWidth,
@@ -186,15 +182,14 @@ function render(){
 		}
 	}else{
 		if(ballX>=document.body.clientWidth&&!scoreRec){
-			scoreRec=true;
-			score++;
+			//scoreRec=true;
+			//score++;
 			database.ref().update({
 				slaveScore: score
 			});
 		}else{
 			scoreRec=false;
 		}
-        */
 	}
 	renderPaddle();	
 	renderBall();
