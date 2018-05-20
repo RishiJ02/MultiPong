@@ -193,13 +193,13 @@ function render(){
 	}
 	renderPaddle();	
 	renderBall();
-	drawScore();
+	//drawScore();
 }
 function drawScore(){
 	ctx.font = "32px Lucky Guy";
 	if(MASTER){
-		//ctx.fillText((disScore), document.body.clientWidth-50, 50);
+		ctx.fillText((disScore), document.body.clientWidth-50, 50);
 	}else{
-		//ctx.fillText((oldSlaveScore), 50, 50);
+		ctx.fillText((oldSlaveScore), 50, 50);
 	}
 }
