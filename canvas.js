@@ -1,15 +1,26 @@
 // Initialize Firebase
-  var config = {
+var config = {
     apiKey: "AIzaSyBtLRlcXkrQQTcs-1Qp1Od2rbPoYcwTEHE",
     authDomain: "sync-test-game.firebaseapp.com",
     databaseURL: "https://sync-test-game.firebaseio.com",
     projectId: "sync-test-game",
     storageBucket: "sync-test-game.appspot.com",
     messagingSenderId: "825894585819"
-  };
-  firebase.initializeApp(config);
+};
+firebase.initializeApp(config);
 
-  var database = firebase.database();
+var database = firebase.database();
+
+
+//database.ref().update({
+  	//first: false,
+	//x:50,
+	//y:500,
+	//screenWidth: document.body.clientWidth,
+	//VX:10
+  //});
+
+
 
 const canvas = document.getElementById("myCanvas");
 var ctx = canvas.getContext("2d");
@@ -22,8 +33,8 @@ var ballX = document.body.clientWidth;
 var paddleX = 5;
 var paddleY = 5;
 
-var ballVX = 15;
-var ballVY = 10;
+var ballVX = 40;
+var ballVY = 30;
 
 var score=0;
 
@@ -170,7 +181,7 @@ function render(){
 		});
 		if(ballX<=0&&!scoreRec){
 			scoreRec=true;
-			score++;
+			//score++;
 			database.ref().update({
 				masterScore: score,
 				x:document.body.clientWidth,
@@ -183,7 +194,7 @@ function render(){
 	}else{
 		if(ballX>=document.body.clientWidth&&!scoreRec){
 			scoreRec=true;
-			score++;
+			//score++;
 			database.ref().update({
 				slaveScore: score
 			});
@@ -200,6 +211,6 @@ function drawScore(){
 	if(MASTER){
 		//ctx.fillText((disScore), document.body.clientWidth-50, 50);
 	}else{
-		//ctx.fillText((oldSlaveScore), 50, 50);
+		//ctx.fillText((disScore), 50, 50);
 	}
 }
