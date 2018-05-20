@@ -98,13 +98,12 @@ database.ref().once("value", function(e){
 	RUN = true;
   });
 
-//var oldSlaveScore = 0;
-//var disScore = 0;
+var oldSlaveScore = 0;
+var disScore = 0;
 database.ref().on("value", function(e){
 	if(RUN){
 	if(MASTER){
   		ballX = e.val().x;
-        /*
 		if(oldSlaveScore!=e.val().slaveScore){
 			oldSlaveScore=e.val().slaveScore;
 			disScore = e.val().slaveScore
@@ -118,11 +117,11 @@ database.ref().on("value", function(e){
 		ballX = e.val().x-oppWidth;
 		disScore = e.val().masterScore;
 	}
-    */
+    
 	ballY = e.val().y;
 	}
 	ballVX = e.val().VX;
-  };
+  });
 
 
 function clear(){
