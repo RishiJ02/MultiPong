@@ -33,8 +33,8 @@ var ballX = document.body.clientWidth;
 var paddleX = 5;
 var paddleY = 5;
 
-var ballVX = 5;
-var ballVY = 5;
+var ballVX = 10;
+var ballVY = 8;
 
 var score=0;
 
@@ -202,7 +202,6 @@ function render(){
 			scoreRec=false;
 		}
 	}
-    
 	renderPaddle();	
 	renderBall();
 	drawScore();
