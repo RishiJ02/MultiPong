@@ -33,8 +33,8 @@ var ballX = document.body.clientWidth;
 var paddleX = 5;
 var paddleY = 5;
 
-var ballVX = 10;
-var ballVY = 10;
+var ballVX = 5;
+var ballVY = 5;
 
 var score=0;
 
@@ -169,7 +169,7 @@ function render(){
 	count++;
 	clear();
 	if(MASTER){
-		if(ballY-50+ballVY<0||ballY+50+ballVY>window.innerHeight&&!hitWall){
+		if(ballY-50+ballVY<0||ballY+50+ballVY>window.innerHeight-50&&!hitWall){
 			ballVY=ballVY*-1;
 			hitWall = true;
 		}else{
@@ -192,7 +192,7 @@ function render(){
 			scoreRec=false;
 		}
 	}else{
-		if(ballX>=document.body.clientWidth&&!scoreRec){
+		if(ballX>=document.body.clientWidth-50&&!scoreRec){
 			scoreRec=true;
 			score++;
 			database.ref().update({
