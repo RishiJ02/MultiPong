@@ -11,17 +11,6 @@
 
   var database = firebase.database();
 
-
-//database.ref().update({
-  	//first: false,
-	//x:50,
-	//y:500,
-	//screenWidth: document.body.clientWidth,
-	//VX:10
-  //});
-
-
-
 const canvas = document.getElementById("myCanvas");
 var ctx = canvas.getContext("2d");
 var paddleImage = new Image();
@@ -33,8 +22,8 @@ var ballX = document.body.clientWidth;
 var paddleX = 5;
 var paddleY = 5;
 
-var ballVX = 40;
-var ballVY = 30;
+var ballVX = 15;
+var ballVY = 10;
 
 var score=0;
 
