@@ -169,7 +169,7 @@ function render(){
 	count++;
 	clear();
 	if(MASTER){
-		if(ballY-50+ballVY<0||ballY+50+ballVY>window.innerHeight-50&&!hitWall){
+		if(ballY-50+ballVY<0||ballY+50+ballVY>window.innerHeight&&!hitWall){
 			ballVY=ballVY*-1;
 			hitWall = true;
 		}else{
@@ -181,7 +181,7 @@ function render(){
 		});
 		if(ballX<=0&&!scoreRec){
 			scoreRec=true;
-			score++;
+			//score++;
 			database.ref().update({
 				masterScore: score,
 				x:document.body.clientWidth,
@@ -192,9 +192,9 @@ function render(){
 			scoreRec=false;
 		}
 	}else{
-		if(ballX>=document.body.clientWidth-50&&!scoreRec){
+		if(ballX>=document.body.clientWidth&&!scoreRec){
 			scoreRec=true;
-			score++;
+			//score++;
 			database.ref().update({
 				slaveScore: score
 			});
@@ -202,6 +202,7 @@ function render(){
 			scoreRec=false;
 		}
 	}
+    
 	renderPaddle();	
 	renderBall();
 	drawScore();
@@ -209,8 +210,8 @@ function render(){
 function drawScore(){
 	ctx.font = "32px Lucky Guy";
 	if(MASTER){
-		//ctx.fillText((disScore), document.body.clientWidth-50, 50);
+		ctx.fillText((disScore), document.body.clientWidth-50, 50);
 	}else{
-		//ctx.fillText((disScore), 50, 50);
+		ctx.fillText((disScore), 50, 50);
 	}
 }
