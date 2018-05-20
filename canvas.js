@@ -181,7 +181,7 @@ function render(){
 		});
 		if(ballX<=0&&!scoreRec){
 			scoreRec=true;
-			//score++;
+			score++;
 			database.ref().update({
 				masterScore: score,
 				x:document.body.clientWidth,
@@ -194,7 +194,7 @@ function render(){
 	}else{
 		if(ballX>=document.body.clientWidth&&!scoreRec){
 			scoreRec=true;
-			//score++;
+			score++;
 			database.ref().update({
 				slaveScore: score
 			});
