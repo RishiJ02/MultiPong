@@ -170,7 +170,7 @@ function render(){
 		});
 		if(ballX<=0&&!scoreRec){
 			scoreRec=true;
-			//score++;
+			score++;
 			database.ref().update({
 				masterScore: score,
 				x:document.body.clientWidth,
@@ -183,7 +183,7 @@ function render(){
 	}else{
 		if(ballX>=document.body.clientWidth&&!scoreRec){
 			scoreRec=true;
-			//score++;
+			score++;
 			database.ref().update({
 				slaveScore: score
 			});
@@ -193,13 +193,13 @@ function render(){
 	}
 	renderPaddle();	
 	renderBall();
-	//drawScore();
+	drawScore();
 }
 function drawScore(){
-	//ctx.font = "32px Lucky Guy";
-	//if(MASTER){
+	ctx.font = "32px Lucky Guy";
+	if(MASTER){
 		//ctx.fillText((disScore), document.body.clientWidth-50, 50);
-	//}else{
+	}else{
 		//ctx.fillText((oldSlaveScore), 50, 50);
-	//}
+	}
 }
