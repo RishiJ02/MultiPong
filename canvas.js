@@ -204,13 +204,3 @@ function render(){
 	renderPaddle();	
 	renderBall();
 }
-var fps = 30;
-
-function draw() {
-	setTimeout(function() {
-		requestAnimationFrame(draw);
-
-	}, 1000 / fps);
-}
-
-draw();
