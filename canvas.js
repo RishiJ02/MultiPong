@@ -11,33 +11,29 @@ firebase.initializeApp(config);
 
 var database = firebase.database();
 
-
-//database.ref().update({
-  	//first: false,
-	//x:50,
-	//y:500,
-	//screenWidth: document.body.clientWidth,
-	//VX:10
-  //});
-
-
-
+//Creates a canvas 
 const canvas = document.getElementById("myCanvas");
 var ctx = canvas.getContext("2d");
+
+//Creates the paddle image
 var paddleImage = new Image();
 paddleImage.src = "paddle.png";
 
+//Sets Ball Position
 var ballY = document.body.clientHeight/2;
 var ballX = document.body.clientWidth;
 
+//Sets Paddle Position
 var paddleX = 5;
 var paddleY = 5;
 
+//Sets Ball Speed
 var ballVX = 5;
 var ballVY = 4;
 
 var score=0;
 
+//Creates the event listeners in app.js after paddle loads in
 paddleImage.onload = function(e){
 	console.log("START");
 	start();
@@ -65,17 +61,16 @@ paddleImage.onload = function(e){
 
 }
 
-
-var game = {
-	//height: 
-}
-
+//Defines a function that initializes variables at the start
 function start(){
 	canvas.width = document.body.clientWidth;
 	canvas.height = window.innerHeight;
 	var loop = setInterval(render,10);
 }
 
+//Creates Master-Slave system that makes it so that two devices can communicate with each other
+//Master has no advantages, the master just uses firebase more so the calculations between 
+//the two devices don't create interferences or differences
 var MASTER=false;
 var oppWidth;
 var RUN = false;
@@ -103,13 +98,14 @@ database.ref().once("value", function(e){
 		MASTER=true;
 		paddleX=5;
 	}
-	console.log(MASTER);
 	oppWidth = e.val().screenWidth;
 	RUN = true;
   });
 
 var oldSlaveScore = 0;
 var disScore = 0;
+
+//Calculations on ball position and updates variables
 database.ref().on("value", function(e){
 	if(RUN){
 	if(MASTER){
@@ -130,20 +126,20 @@ database.ref().on("value", function(e){
 	}
 	ballVX = e.val().VX;
   });
-
+//clears the screen
 function clear(){
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
-
+//renders the ball
 function renderBall(){
 	ctx.beginPath();
 	ctx.arc(ballX, ballY, 50, 0, 2*Math.PI);
 	ctx.fill();
 	ctx.closePath();
 }
+//renders the paddle and creates code that detects collisions with the paddle and ball
 var contact = 0;
 function renderPaddle(){
-	//ctx.drawImage(paddleImage,paddleX,paddleY,10,100);
 	ctx.fillRect(paddleX,paddleY,50,400);
 	if(MASTER){
 		if(ballX-50>=paddleX && ballX-50<=paddleX+50 &&  ballY+10>=paddleY && ballY-10<=paddleY+400 && contact>100){
@@ -161,6 +157,7 @@ function renderPaddle(){
 		}
 	}
 }
+//Increments score, checks if the ball hits any wall, updates positions and renders all existent items in the game
 var scoreRec = false;
 var count =0;
 var hitWall = false;
