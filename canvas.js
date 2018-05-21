@@ -35,34 +35,30 @@ var paddleY = 5;
 
 var ballVX = 5;
 var ballVY = 4;
-
-var score=0;
-
 paddleImage.onload = function(e){
 	console.log("START");
 	start();
 
 
-canvas.addEventListener("touchstart", function (e) {
-  if (e.target == canvas) {
+    canvas.addEventListener("touchstart", function (e) {
+    if (e.target == canvas) {
     e.preventDefault();
-  }
-}, false);
+    }
+    }, false);
 
-canvas.addEventListener("touchend", function (e) {
-  if (e.target == canvas) {
+    canvas.addEventListener("touchend", function (e) {
+    if (e.target == canvas) {
     e.preventDefault();
-  }
-}, false);
+    }
+    }, false);
 
-canvas.addEventListener("touchmove", function (e) {
-	var touch = e.touches[0];
-	if (e.target == canvas) {
-		e.preventDefault();
-	}
-	paddleY = touch.clientY;
-}, false);
-
+    canvas.addEventListener("touchmove", function (e) {
+    var touch = e.touches[0];
+    if (e.target == canvas) {
+        e.preventDefault();
+    }
+    paddleY = touch.clientY;
+    }, false);
 
 }
 
@@ -97,8 +93,6 @@ database.ref().once("value", function(e){
 		y:ballY,
 		screenWidth: document.body.clientWidth,
 		VX:10,
-		slaveScore: 0,
-		masterScore: 0
 	    });
 		database.ref().update({first: true});
 		MASTER=true;
@@ -109,23 +103,12 @@ database.ref().once("value", function(e){
 	RUN = true;
   });
 
-var oldSlaveScore = 0;
-var disScore = 0;
 database.ref().on("value", function(e){
 	if(RUN){
 	if(MASTER){
   		ballX = e.val().x;
-		if(oldSlaveScore!=e.val().slaveScore){
-			oldSlaveScore=e.val().slaveScore;
-			disScore = e.val().slaveScore
-			database.ref().update({
-				x:document.body.clientWidth,
-				y:document.body.clientHeight/2
-			});
-		}
 	}else{
 		ballX = e.val().x-oppWidth;
-		disScore = e.val().masterScore;
 	}
 	ballY = e.val().y;
 	}
@@ -162,7 +145,6 @@ function renderPaddle(){
 		}
 	}
 }
-var scoreRec = false;
 var count =0;
 var hitWall = false;
 function render(){
@@ -179,29 +161,8 @@ function render(){
    			x:ballX+ballVX,
 			y:ballY+ballVY
 		});
-		if(ballX<=0&&!scoreRec){
-			scoreRec=true;
-			score++;
-			database.ref().update({
-				masterScore: score,
-				x:document.body.clientWidth,
-
-				y:document.body.clientHeight/2
-			});
-		}else{
-			scoreRec=false;
-		}
-	}else{
-		if(ballX>=document.body.clientWidth&&!scoreRec){
-			scoreRec=true;
-			score++;
-			database.ref().update({
-				slaveScore: score
-			});
-		}else{
-			scoreRec=false;
-		}
-	}
 	renderPaddle();	
 	renderBall();
+    }
 }
+
